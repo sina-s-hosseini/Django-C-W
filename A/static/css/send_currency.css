@@ -1,0 +1,326 @@
+* {
+    box-sizing: border-box;
+    direction: ltr;
+    font-family: sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at 50% 50%, #2b2c68, transparent 50%),
+                radial-gradient(circle at 80% 80%, #b02f8b5d, transparent 65%),
+                #171f22;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: transparent;
+    padding: 25px 0;
+    border-bottom: 2px solid #d8ded6;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-items {
+    list-style: none;
+    display: block; /* همیشه موجود اما مخفی */
+    flex-direction: column;
+    background: rgba(17, 1, 20, 0.974);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    opacity: 0; /* در حالت بسته نامرئی */
+    visibility: hidden; /* در حالت بسته غیرقابل تعامل */
+    transform: translateY(-20px); /* حرکت به بالا */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s;
+}
+
+.nav-toggle:checked ~ .nav-items {
+    opacity: 1; /* در حالت باز مرئی */
+    visibility: visible;
+    transform: translateY(0); /* بازگشت به موقعیت اصلی */
+}
+
+.nav-items li a {
+    text-decoration: none;
+    color: #d8ded6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    padding: 15px;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out; /* فقط برای رنگ و سایه */
+}
+
+.nav-items li a:hover {
+    color: #cd9fff;
+    text-shadow: 0 0 60px #cd9fffb9;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-toggle-label span {
+    background: #d8ded6;
+    height: 4px;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out; /* زمان بیشتر برای نرمی */
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+header {
+    margin-bottom: 40px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+h1 {
+    color: #d8ded6;
+    font-size: 40px;
+    margin: 0;
+}
+
+.transfer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(90%, 400px);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+
+.transfer-card h2 {
+    color: #d8ded6;
+    font-weight: normal;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    color: #d8ded6;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group.recipient-address {
+    position: relative;
+}
+
+.form-group.recipient-address label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    font-size: 12px;
+    color: #b198cf58;
+    background-color: transparent;
+    padding: 0 5px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.form-group.recipient-address input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d8ded6;
+    color: #d8ded6;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group.recipient-address input:focus,
+.form-group.recipient-address input:not(:placeholder-shown) {
+    border-color: #cd9fff;
+    box-shadow: 0 0 10px #cd9fff8a;
+}
+
+.form-group.recipient-address input:focus + label,
+.form-group.recipient-address input:not(:placeholder-shown) + label {
+    top: -15px;
+    left: 5px;
+    font-size: 12px;
+    color: #9d56e8;
+}
+
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d8ded6;
+    border-radius: 5px;
+    color: #d8ded6;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    background-color: transparent;
+}
+
+.form-group input:focus {
+    border-color: #cd9fff;
+    box-shadow: 0 0 10px #cd9fff8a;
+
+}
+
+.submit-btn {
+    background-color: #9d56e8;
+    color: #3e0437e5;
+    opacity: 0.7;
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 15px auto 0;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    box-shadow: 0 0 20px #cd9fff;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.submit-btn:active{
+    background-color: #a98cc8;
+    transition: background-color 0.3s;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .transfer-card {
+        padding: 15px;
+    }
+
+    .transfer-card h2 {
+        font-size: 20px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group.recipient-address label {
+        font-size: 11px;
+        top: 8px;
+    }
+
+    .form-group.recipient-address input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .form-group.recipient-address input:focus + label,
+    .form-group.recipient-address input:not(:placeholder-shown) + label {
+        font-size: 11px;
+        top: -12px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .transfer-card {
+        width: 95%;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group.recipient-address label {
+        font-size: 10px;
+        top: 7px;
+    }
+
+    .form-group.recipient-address input {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .form-group.recipient-address input:focus + label,
+    .form-group.recipient-address input:not(:placeholder-shown) + label {
+        font-size: 10px;
+        top: -11px;
+    }
+
+    .form-group input {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .submit-btn {
+        font-size: 13px;
+        padding: 7px;
+    }
+}

@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+<div class="container">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="nav-items">
+            <li><a href="{% url 'wallet:wallet' %}">Wallet</a></li>
+            <li><a href="{% url 'users:profile' %}">Profile</a></li>
+            <li><a href="{% url 'wallet:send_currency' %}">Transfer</a></li>
+            <li><a href="{% url 'wallet:buy_currency' %}">Buy</a></li>
+            <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Welcome, {{ request.user.username }}!</h1>
+        <p id="clock" class="timestamp">📅</p>
+    </header>
+
+    <!-- Wallet -->
+    <div class="glass-box">
+        <h2>Your Wallet</h2>
+        <p><strong>Balance:</strong> {{ wallet.balance }} ETH</p>
+    </div>
+
+    <!-- Transactions -->
+    <div class="glass-box">
+        <h2>Recent Transactions</h2>
+        {% if transactions %}
+            <ul class="transaction-list">
+                {% for tx in transactions %}
+                    <li>
+                        Sent {{ tx.amount }} ETH to {{ tx.receiver.username }} on {{ tx.timestamp }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recent transactions.</p>
+        {% endif %}
+    </div>
+
+    <!-- Account Analysis -->
+    <div class="glass-box account-analysis">
+        <h2>Account Analysis</h2>
+        <div class="analysis-item">
+            <span>Total Sent:</span>
+            <span>{{ sent_total }} ETH</span>
+        </div>
+        <div class="analysis-item">
+            <span>Total Received:</span>
+            <span>{{ received_total }} ETH</span>
+        </div>
+        <div class="analysis-item">
+            <span>Total Transactions:</span>
+            <span>{{ total_transactions }}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Live Clock -->
+<script>
+    function updateClock() {
+        const now = new Date();
+        const formatted = now.toLocaleString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        document.getElementById("clock").innerText = "📅 " + formatted;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer</title>
+    <link rel="stylesheet" href="{% static 'css/send_currency.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="nav-items">
+            <li><a href="{% url 'wallet:wallet' %}">Wallet</a></li>
+            <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'wallet:send_currency' %}">Transfer</a></li>
+            <li><a href="{% url 'wallet:buy_currency' %}">Purchase</a></li>
+            <li><a href="{% url 'users:profile' %}">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>ETH Transfer</h1>
+        </header>
+
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: white;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form method="post" class="transfer-card">
+            {% csrf_token %}
+            <h2>Transfer Details</h2>
+
+            <div class="form-group recipient-address">
+                <input type="text" name="receiver" placeholder=" " required>
+                <label>Recipient Address</label>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount (ETH)</label>
+                <input type="number" name="amount" id="amount" placeholder="0.0 ETH" step="0.0001" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Confirm</button>
+        </form>
+    </div>
+</body>
+</html>

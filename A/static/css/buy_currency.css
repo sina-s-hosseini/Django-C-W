@@ -1,0 +1,290 @@
+* {
+        box-sizing: border-box;
+        direction: ltr;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+body {
+        background: radial-gradient(circle at 500px 500px, #2b2c68, transparent 50%),
+                    radial-gradient(circle at 1000px 900px, #b02f8b5d, transparent 65%),
+                    #171f22;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+.navbar {
+    width: 100%;
+    background-color: transparent;
+    padding: 25px 0;
+    border-bottom: 2px solid #d8ded6;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    }
+
+.nav-items {
+    list-style: none;
+    display: block; /* همیشه موجود اما مخفی */
+    flex-direction: column;
+    background: rgba(17, 1, 20, 0.974);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    opacity: 0; /* در حالت بسته نامرئی */
+    visibility: hidden; /* در حالت بسته غیرقابل تعامل */
+    transform: translateY(-20px); /* حرکت به بالا */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s;
+    }
+
+.nav-toggle:checked ~ .nav-items {
+    opacity: 1; /* در حالت باز مرئی */
+    visibility: visible;
+    transform: translateY(0); /* بازگشت به موقعیت اصلی */
+    }
+
+.nav-items li a {
+    text-decoration: none;
+    color: #d8ded6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    padding: 15px;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out; /* فقط برای رنگ و سایه */
+    }
+
+.nav-items li a:hover {
+    color: #cd9fff;
+    text-shadow: 0 0 60px #cd9fffb9;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-toggle-label span {
+    background: #d8ded6;
+    height: 4px;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out; /* زمان بیشتر برای نرمی */
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 20px 15px;
+}
+
+.purchase-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transition: 0.7s;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: #d8ded6;
+}
+
+.purchase-form h2 {
+    margin: 0;
+    margin-bottom: 20px;
+    color: #d8ded6;
+    font-size: 24px;
+}
+
+.purchase-input {
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+    align-items: stretch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.purchase-input input,
+.purchase-input select {
+    background: transparent;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #b198cf;
+    font-size: 14px;
+}
+
+.purchase-input input:focus,
+.purchase-input select:focus {
+    border-color: #cd9fff;
+    box-shadow: 0 0 10px #cd9fff8a;
+    outline: none;
+}
+
+.purchase-input label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    font-size: 12px;
+    color: #b198cf;
+    background-color: transparent;
+    padding: 0 5px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+
+}
+
+.purchase-input input:focus + label,
+.purchase-input input:not(:placeholder-shown) + label,
+.purchase-input select:focus + label,
+.purchase-input select:not(:placeholder-shown) + label {
+    top: -15px;
+    left: 5px;
+    font-size: 12px;
+    color: #9d56e8;
+}
+
+.purchase-button {
+    background-color: #9d56e8;
+    color: #3e0437e5;
+    opacity: 0.7;
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 0 auto ;
+    font-size: 16px;
+}
+
+.purchase-button:hover {
+    box-shadow: 0 0 20px #cd9fff;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.purchase-button:active {
+    background-color: #a98cc8;
+    transition: background-color 0.3s;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 70px 10px 15px 10px;
+    }
+
+    .purchase-form {
+        padding: 30px;
+        max-width: 350px;
+    }
+
+    .purchase-form h2 {
+        font-size: 20px;
+    }
+
+    .purchase-input input,
+    .purchase-input select {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .purchase-input label {
+        font-size: 11px;
+    }
+
+    .purchase-input input:focus + label,
+    .purchase-input input:not(:placeholder-shown) + label,
+    .purchase-input select:focus + label,
+    .purchase-input select:not(:placeholder-shown) + label {
+        font-size: 11px;
+        top: -12px;
+    }
+
+    .purchase-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 60px 5px 10px 5px;
+    }
+
+    .purchase-form {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .purchase-form h2 {
+        font-size: 18px;
+    }
+
+    .purchase-input input,
+    .purchase-input select {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .purchase-input label {
+        font-size: 10px;
+    }
+
+    .purchase-input input:focus + label,
+    .purchase-input input:not(:placeholder-shown) + label,
+    .purchase-input select:focus + label,
+    .purchase-input select:not(:placeholder-shown) + label {
+        font-size: 10px;
+        top: -11px;
+    }
+
+    .purchase-button {
+        font-size: 13px;
+        padding: 7px;
+    }
+}

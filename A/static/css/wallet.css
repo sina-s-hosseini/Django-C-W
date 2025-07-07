@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+    direction: ltr;
+    font-family: sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at 60% 50%, #2b2c68, transparent 50%),
+                radial-gradient(circle at 10% 10%, #b02f8b5d, transparent 65%),
+                #171f22;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 80px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar {
+    width: 100%;
+    background-color: transparent;
+    padding: 25px 0;
+    border-bottom: 2px solid #d8ded6;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-items {
+    list-style: none;
+    display: block;
+    flex-direction: column;
+    background: rgba(17, 1, 20, 0.974);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: 0.4s ease-in-out;
+}
+
+.nav-toggle:checked ~ .nav-items {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-items li a {
+    text-decoration: none;
+    color: #d8ded6;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    font-size: 18px;
+}
+
+.nav-items li a:hover {
+    color: #cd9fff;
+    text-shadow: 0 0 60px #cd9fffb9;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-toggle-label span {
+    background: #d8ded6;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+header {
+    margin: 20px 0;
+}
+
+h1 {
+    color: #d8ded6;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.ETH-container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
+}
+
+.ETH-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.text-container h3 {
+    margin: 0;
+    color: #d8ded6;
+}
+
+.text-container p {
+    margin: 0;
+    color: #d8ded6;
+    font-size: 14px;
+}
+
+.Ethereum {
+    margin-left: auto;
+    color: #d8ded6;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.transactions {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-title {
+    color: #d8ded6;
+    margin-bottom: 15px;
+}
+
+.transaction-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction-item {
+    color: #d8ded6;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.no-transactions {
+    color: #aaa;
+}
+
+.wallet-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.wallet-button {
+    background-color: #9d56e8;
+    color: #3e0437e5;
+    opacity: 0.85;
+    padding: 12px 20px;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(205, 159, 255, 0.2);
+}
+
+.wallet-button:hover {
+    box-shadow: 0 0 30px #cd9fff;
+    opacity: 1;
+}
+
+.wallet-button:active {
+    background-color: #a98cc8;
+    transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+    .ETH-container,
+    .transactions {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>Hello</title>
+</head>
+<body>
+    <div class="container">
+        <div class="signup-box">
+            <h1>Hello</h1>
+
+            {% if messages %}
+                <ul class="error-messages">
+                    {% for message in messages %}
+                        <li style="color: red;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-box">
+                    <input type="text" name="username" placeholder=" " id="username" required>
+                    <label for="username">Username</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="email" name="email" placeholder=" " id="email" required>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" name="password1" placeholder=" " id="password" required>
+                    <label for="password">Password</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" name="password2" placeholder=" " id="confirm-password" required>
+                    <label for="confirm-password">Confirm Password</label>
+                </div>
+
+                <div class="input-box">
+                    <button type="submit" class="signup-button">Signup</button>
+                </div>
+
+                <p>Have an account? <a href="{% url 'users:login' %}">Log in</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

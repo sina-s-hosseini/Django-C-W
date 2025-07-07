@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <ul class="nav-items">
+                <li><a href="{% url 'wallet:wallet' %}">Wallet</a></li>
+                <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'wallet:send_currency' %}">Transfer</a></li>
+                <li><a href="{% url 'wallet:buy_currency' %}">Purchase</a></li>
+                <li><a href="{% url 'users:profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+
+        <div class="profile">
+            <h2>Profile</h2>
+
+            <div class="profile-row">
+                <label>Username:</label>
+                <span>{{ user.username }}</span>
+            </div>
+            <div class="profile-row">
+                <label>Email:</label>
+                <span>{{ user.email }}</span>
+            </div>
+            <div class="profile-row">
+                <label>Joined:</label>
+                <span>{{ user.date_joined|date:"F d, Y" }}</span>
+            </div>
+            <div class="profile-row">
+                <label>Bio:</label>
+                <span>{{ user.userprofile.bio|default:"No bio yet." }}</span>
+            </div>
+            <div class="profile-row">
+                <label>Profile Picture:</label>
+                {% if user.userprofile.profile_picture %}
+                    <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+                {% else %}
+                    <span>No picture uploaded.</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="Update-profile">
+            <h2>Update Profile</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="new-info">
+                    <input type="text" name="username" id="new-username" value="{{ user.username }}" placeholder=" " required>
+                    <label for="new-username">New Username</label>
+                </div>
+                <div class="new-info">
+                    <input type="email" name="email" id="new-email" value="{{ user.email }}" placeholder=" " required>
+                    <label for="new-email">New Email</label>
+                </div>
+                <div class="new-info">
+                    <input type="password" name="password" id="new-password" placeholder=" ">
+                    <label for="new-password">New Password</label>
+                </div>
+                <div class="new-info">
+                    <input type="text" name="bio" id="bio" value="{{ user.userprofile.bio }}" placeholder=" ">
+                    <label for="bio">Bio</label>
+                </div>
+                <div class="new-info">
+                    <input type="file" name="profile_picture" id="profile_picture">
+                </div>
+                <button type="submit" class="update-button">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

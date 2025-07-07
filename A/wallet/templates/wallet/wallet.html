@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet</title>
+    <link rel="stylesheet" href="{% static 'css/wallet.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <ul class="nav-items">
+                <li><a href="{% url 'wallet:wallet' %}">Wallet</a></li>
+                <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'wallet:send_currency' %}">Transfer</a></li>
+                <li><a href="{% url 'wallet:buy_currency' %}">Purchase</a></li>
+                <li><a href="{% url 'users:profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+
+        <header><h1>My Wallet</h1></header>
+
+        <div class="ETH-container">
+            <img src="{% static 'img/ethereum.png' %}" class="ETH-image" alt="ETH">
+            <div class="text-container">
+                <h3>Ethereum</h3>
+                <p>ETH</p>
+            </div>
+            <div class="Ethereum">
+                <span id="Ethereum">{{ wallet.balance }}</span>
+            </div>
+        </div>
+
+        <div class="transactions">
+            <h3 class="transaction-title">Recent Transactions</h3>
+            {% if transactions %}
+                <ul class="transaction-list">
+                    {% for tx in transactions %}
+                        <li class="transaction-item">
+                            {% if tx.sender == request.user %}
+                                Sent {{ tx.amount }} ETH to {{ tx.receiver.username }}
+                            {% else %}
+                                Received {{ tx.amount }} ETH from {{ tx.sender.username }}
+                            {% endif %}
+                            <br>
+                            <span class="transaction-date">{{ tx.timestamp }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-transactions">No transactions yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="wallet-actions">
+            <a href="{% url 'wallet:send_currency' %}" class="wallet-button">Send ETH</a>
+            <a href="{% url 'wallet:buy_currency' %}" class="wallet-button">Buy ETH</a>
+        </div>
+    </div>
+</body>
+</html>

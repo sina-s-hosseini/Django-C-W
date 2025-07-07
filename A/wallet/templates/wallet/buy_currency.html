@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/buy_currency.css' %}">
+    <title>Buy ETH</title>
+</head>
+<body>
+    <nav class="navbar">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="nav-items">
+            <li><a href="{% url 'wallet:wallet' %}">Wallet</a></li>
+            <li><a href="{% url 'users:dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'wallet:send_currency' %}">Transfer</a></li>
+            <li><a href="{% url 'wallet:buy_currency' %}">Buy ETH</a></li>
+            <li><a href="{% url 'users:profile' %}">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="purchase-form">
+            <h2>Buy Ethereum</h2>
+
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li style="color: white;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="purchase-input">
+                    <input type="number" name="amount" step="0.0001" placeholder=" " required>
+                    <label>Amount (ETH)</label>
+                </div>
+
+                <button type="submit" class="purchase-button">Buy Now</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

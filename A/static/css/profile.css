@@ -1,0 +1,339 @@
+* {
+    box-sizing: border-box;
+    direction: ltr;
+    font-family: sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at 500px 500px, #2b2c68, transparent 50%),
+                radial-gradient(circle at 1000px 900px, #b02f8b5d, transparent 65%),
+                #171f22;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 80px 15px 20px 15px;
+}
+
+.navbar {
+    width: 100%;
+    background-color: transparent;
+    padding: 25px 0;
+    border-bottom: 2px solid #d8ded6;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-items {
+    list-style: none;
+    display: block;
+    flex-direction: column;
+    background: rgba(17, 1, 20, 0.974);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, visibility 0.4s;
+}
+
+.nav-toggle:checked ~ .nav-items {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-items li a {
+    text-decoration: none;
+    color: #d8ded6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    padding: 15px;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.nav-items li a:hover {
+    color: #cd9fff;
+    text-shadow: 0 0 60px #cd9fffb9;
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-toggle-label span {
+    background: #d8ded6;
+    height: 4px;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle:checked + .nav-toggle-label span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transition: 0.7s;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: #d8ded6;
+}
+
+.profile h2 {
+    margin: 0;
+    margin-bottom: 20px;
+    color: #d8ded6;
+    font-size: 24px;
+}
+
+.profile-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.profile-row label {
+    font-weight: bold;
+    width: auto;
+    text-align: left;
+    font-size: 16px;
+}
+
+.Update-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.042);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transition: 0.7s;
+    box-sizing: border-box;
+    border-radius: 20px;
+    margin-top: 20px;
+    color: #d8ded6;
+}
+
+.Update-profile h2 {
+    margin: 0;
+    margin-bottom: 20px;
+    color: #d8ded6;
+    font-size: 24px;
+}
+
+.new-info {
+    position: relative;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+    align-items: stretch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.new-info input {
+    background: transparent;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #b198cf;
+    font-size: 14px;
+    outline: none;
+}
+
+.new-info input:focus {
+    border-color: #cd9fff;
+    box-shadow: 0 0 10px #cd9fff8a;
+}
+
+.new-info label {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    font-size: 12px;
+    color: #b198cf;
+    background-color: transparent;
+    padding: 0 5px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.new-info input:focus + label,
+.new-info input:not(:placeholder-shown) + label {
+    top: -13px;
+    left: 5px;
+    font-size: 12px;
+    color: #9d56e8;
+}
+
+.update-button {
+    font-family: sans-serif;
+    background-color: #9d56e8;
+    color: #3e0437e5;
+    opacity: 0.7;
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 15px auto 0;
+    font-size: 16px;
+}
+
+.update-button:hover {
+    box-shadow: 0 0 20px #cd9fff;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.update-button:active {
+    background-color: #a98cc8;
+    transition: background-color 0.3s;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 70px 10px 15px 10px;
+    }
+
+    .profile,
+    .Update-profile {
+        padding: 30px;
+        max-width: 350px;
+    }
+
+    .profile h2,
+    .Update-profile h2 {
+        font-size: 20px;
+    }
+
+    .profile-row label {
+        font-size: 14px;
+    }
+
+    .new-info input {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .new-info label {
+        font-size: 12px;
+        top: 14px;
+    }
+
+    .new-info input:focus + label,
+    .new-info input:not(:placeholder-shown) + label {
+        font-size: 11px;
+        top: -12px;
+    }
+
+    .update-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 60px 5px 10px 5px;
+    }
+
+    .nav-items li a {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .profile,
+    .Update-profile {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .profile h2,
+    .Update-profile h2 {
+        font-size: 18px;
+    }
+
+    .profile-row label {
+        font-size: 13px;
+    }
+
+    .new-info input {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .new-info label {
+        font-size: 11px;
+    }
+
+    .new-info input:focus + label,
+    .new-info input:not(:placeholder-shown) + label {
+        font-size: 10px;
+        top: -11px;
+    }
+
+    .update-button {
+        font-size: 13px;
+        padding: 7px;
+    }
+}
